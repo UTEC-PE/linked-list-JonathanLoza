@@ -102,7 +102,7 @@ public:
         return temp->data;
     };
     void concat(List<T> &other){
-        if(!other.head || !head){
+        if(!other.head || !head){ // Si una de las listas es vacía, entonces deberías retornar la otra
            throw "Lista vacia ";
         }
         tail->next=other.head;
@@ -130,7 +130,7 @@ public:
         head->printReverse();
         cout<<endl;
     };
-    void clear(){
+    void clear(){ // No es tan simple, aquí deberías iterar sobre los elementos de la lista para darles delete
         head=nullptr;
         tail=nullptr;
         nodes=0;
@@ -141,11 +141,11 @@ public:
     Iterator<T> end(){
 
     };
-    ~List(){
+    ~List(){ // El clear debería ser similar
         if(head){
             head->killSelf();
         }
-        delete [] head;
+        delete [] head; // Estos dos deletes no deberían hacerse, ya que killSelf ya se encarga de borar head y tail. Fuera de eso, no deberían tener []
         delete [] tail;
     };
 };
